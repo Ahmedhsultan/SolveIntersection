@@ -62,17 +62,12 @@ namespace SolveIntersection.Servicies
                         {
                             //Reverse slope
                             ParamDoubleCollection paramsDouble = subassembly.ParamsDouble;
-                            var slopeKey = paramsDouble["DefaultSlope"];
-                            slopeKey.Value =  (-1);
+                            ParamDouble slopeKey = paramsDouble["DefaultSlope"];
+                            slopeKey.Value *= (-1);
 
-                            //Subassembly cobiedSubassembly = copySubAssembly(subassembly, ts, database);
                             AssemblyGroup assemblyGroupMirrord = copiedAssembly.MirrorSubassembly(subassemblyid);
 
                             subassembly.Erase();
-
-                            /*// Commit the changes to the subassembly
-                            subassembly.UpgradeOpen();
-                            subassembly.DowngradeOpen();*/
                         }
                         else
                         {
@@ -92,9 +87,7 @@ namespace SolveIntersection.Servicies
                 {
                     try
                     {
-                        Subassembly subassembly = ts.GetObject(subassemblyid, OpenMode.ForRead) as Subassembly;
-                        /*String name =  subassembly.Name;
-                        double i = subassembly.Origin.X;*/
+                        Subassembly subassembly = ts.GetObject(subassemblyid, OpenMode.ForWrite) as Subassembly;
                         if (assymbly_Origin == subassembly.Origin)
                             firstSubassembly = subassembly;
                     }
@@ -134,16 +127,6 @@ namespace SolveIntersection.Servicies
             Matrix3d mirrorMatrix = Matrix3d.Displacement(new Vector3d(0, -displacement, 0));
             copiedAss.TransformBy(mirrorMatrix);
 
-            return copiedAss;
-        }
-        public Subassembly copySubAssembly(Subassembly subAasembly, Transaction ts, Database database)
-        {
-            Subassembly copiedAss = (Subassembly)subAasembly.Clone();
-
-            /*BlockTableRecord btr = (BlockTableRecord)ts.GetObject(database.CurrentSpaceId, OpenMode.ForWrite);
-            btr.AppendEntity(copiedAss);
-            ts.AddNewlyCreatedDBObject(copiedAss, true);
-            btr.Close();*/
             return copiedAss;
         }
     }

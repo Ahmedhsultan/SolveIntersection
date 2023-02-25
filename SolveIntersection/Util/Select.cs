@@ -17,7 +17,7 @@ namespace SolveIntersection.Util
                 ts.Abort();
                 return null;
             }
-            T entity = ts.GetObject(sourcePrompt.ObjectId, OpenMode.ForRead) as T;
+            T entity = ts.GetObject(sourcePrompt.ObjectId, OpenMode.ForWrite) as T;
 
             return entity;
         }
@@ -32,7 +32,7 @@ namespace SolveIntersection.Util
                 ts.Abort();
                 return null;
             }
-            T entity = ts.GetObject(sourcePrompt.ObjectId, OpenMode.ForRead) as T;
+            T entity = ts.GetObject(sourcePrompt.ObjectId, OpenMode.ForWrite) as T;
 
             return entity;
         }
