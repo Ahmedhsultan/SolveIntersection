@@ -11,5 +11,7 @@ namespace SolveIntersection.DB.Entities
     {
         public Corridor corr1 { get; set; }
         public Corridor corr2 { get; set; }
+        public Alignment alignment1 { get; set; }
+        public Alignment alignment2 { get; set; }
     }
 }

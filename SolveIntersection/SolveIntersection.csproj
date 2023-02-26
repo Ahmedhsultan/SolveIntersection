@@ -56,6 +56,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DB\Entities\DataDB.cs" />
+    <Compile Include="DB\Entities\PolylinesDB.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="DB\Entities\AlignmentDB.cs" />
     <Compile Include="DB\Entities\AssemblyDB.cs" />
@@ -63,7 +65,9 @@
     <Compile Include="DB\IntersectionDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicies\CreateAssembly.cs" />
+    <Compile Include="Util\DetectIntersecionPoint.cs" />
     <Compile Include="Util\Class1.cs" />
+    <Compile Include="Servicies\GetAlignmentFromCorridor.cs" />
     <Compile Include="Util\Select.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

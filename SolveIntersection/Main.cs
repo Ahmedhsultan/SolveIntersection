@@ -28,8 +28,6 @@ namespace SolveIntersection
             {
                 try
                 {
-                    /*BlockTable acBlkTbl = ts.GetObject(database.BlockTableId, OpenMode.ForRead) as BlockTable;
-                    BlockTableRecord acBlkTblRec = ts.GetObject(acBlkTbl[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;*/
                     #region CreateDB
                     IntersectionDB intersectionDB = IntersectionDB.getInstance();
                     #endregion
@@ -37,14 +35,21 @@ namespace SolveIntersection
                     intersectionDB.corridor.corr1 = Select.cadEntity<Corridor>(ts, editor, "Select First Corridor");
                     intersectionDB.corridor.corr2 = Select.cadEntity<Corridor>(ts, editor, "Select Secound Corridor");
 
-                    /*Polyline pl1 = Select.cadEntity<Polyline>(ts, editor, "Select right turn");
-                    Polyline pl2 = Select.cadEntity<Polyline>(ts, editor, "Select right turn");
-                    Polyline pl3 = Select.cadEntity<Polyline>(ts, editor, "Select right turn");
-                    Polyline pl4 = Select.cadEntity<Polyline>(ts, editor, "Select right turn");*/
+                    intersectionDB.polylinesDB.polyline1 = Select.cadEntity<Polyline>(ts, editor, "Select right turn 1");
+                    intersectionDB.polylinesDB.polyline2 = Select.cadEntity<Polyline>(ts, editor, "Select right turn 2");
+                    intersectionDB.polylinesDB.polyline3 = Select.cadEntity<Polyline>(ts, editor, "Select right turn 3");
+                    intersectionDB.polylinesDB.polyline4 = Select.cadEntity<Polyline>(ts, editor, "Select right turn 4");
                     #endregion
 
                     #region Algorithm
                     CreateAssembly createAssembly = new CreateAssembly(ts, database);
+
+                    GetAlignmentFromCorridor getAlignmentFromCorridor = new GetAlignmentFromCorridor(
+                        ts, editor,
+                        intersectionDB.corridor.corr1,
+                        intersectionDB.corridor.corr2);
+
+
                     #endregion
                 }
                 catch (System.Exception ex)
