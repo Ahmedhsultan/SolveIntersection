@@ -45,6 +45,9 @@ namespace SolveIntersection.Servicies
                     intersectionDB.assembly.assCR1 = copiedAssemblyCutRight;
                 }
             }
+
+            ts.Commit();
+            ts = database.TransactionManager.StartOpenCloseTransaction();
         }
 
         public void mirrorPavement (Assembly copiedAssembly, Transaction ts, Database database)
@@ -63,7 +66,7 @@ namespace SolveIntersection.Servicies
                             //Reverse slope
                             ParamDoubleCollection paramsDouble = subassembly.ParamsDouble;
                             ParamDouble slopeKey = paramsDouble["DefaultSlope"];
-                            slopeKey.Value *= (-1);
+                            //slopeKey.Value *= (-1);
 
                             AssemblyGroup assemblyGroupMirrord = copiedAssembly.MirrorSubassembly(subassemblyid);
 

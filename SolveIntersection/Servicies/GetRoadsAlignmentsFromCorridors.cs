@@ -8,9 +8,9 @@ using System.Collections.Generic;
 
 namespace SolveIntersection.Servicies
 {
-    internal class GetAlignmentFromCorridor
+    internal class GetRoadsAlignmentsFromCorridors
     {
-        public GetAlignmentFromCorridor(Transaction ts, Editor editor, Corridor corridor1, Corridor corridor2)
+        public GetRoadsAlignmentsFromCorridors(Transaction ts, Editor editor, Corridor corridor1, Corridor corridor2)
         {
             Dictionary<Point3d, List<Alignment>> intersectedAlignments = new Dictionary<Point3d, List<Alignment>>();
             Point3d clickedPoint = Select.selectPoint(ts, editor);

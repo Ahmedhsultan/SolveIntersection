@@ -64,10 +64,13 @@
     <Compile Include="DB\Entities\CorridorDB.cs" />
     <Compile Include="DB\IntersectionDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servicies\AddProfileForRightTurnAL.cs" />
     <Compile Include="Servicies\CreateAssembly.cs" />
+    <Compile Include="Servicies\CreateRightTurnAlignments.cs" />
+    <Compile Include="Servicies\CreateRightTurnCorridors.cs" />
+    <Compile Include="Servicies\CutMainRoadCorridor.cs" />
     <Compile Include="Util\DetectIntersecionPoint.cs" />
-    <Compile Include="Util\Class1.cs" />
-    <Compile Include="Servicies\GetAlignmentFromCorridor.cs" />
+    <Compile Include="Servicies\GetRoadsAlignmentsFromCorridors.cs" />
     <Compile Include="Util\Select.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

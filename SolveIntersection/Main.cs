@@ -23,8 +23,7 @@ namespace SolveIntersection
             Document doc = Application.DocumentManager.MdiActiveDocument;
             Editor editor = doc.Editor;
             #endregion
-            Transaction ts = database.TransactionManager.StartOpenCloseTransaction();
-            using (ts)
+            using (Transaction ts = database.TransactionManager.StartOpenCloseTransaction())
             {
                 try
                 {
@@ -37,20 +36,28 @@ namespace SolveIntersection
 
                     intersectionDB.polylinesDB.polyline1 = Select.cadEntity<Polyline>(ts, editor, "Select right turn 1");
                     intersectionDB.polylinesDB.polyline2 = Select.cadEntity<Polyline>(ts, editor, "Select right turn 2");
-                    intersectionDB.polylinesDB.polyline3 = Select.cadEntity<Polyline>(ts, editor, "Select right turn 3");
-                    intersectionDB.polylinesDB.polyline4 = Select.cadEntity<Polyline>(ts, editor, "Select right turn 4");
+                    /*intersectionDB.polylinesDB.polyline3 = Select.cadEntity<Polyline>(ts, editor, "Select right turn 3");
+                    intersectionDB.polylinesDB.polyline4 = Select.cadEntity<Polyline>(ts, editor, "Select right turn 4");*/
                     #endregion
 
                     #region Algorithm
                     CreateAssembly createAssembly = new CreateAssembly(ts, database);
 
-                    GetAlignmentFromCorridor getAlignmentFromCorridor = new GetAlignmentFromCorridor(
+                    GetRoadsAlignmentsFromCorridors getAlignmentFromCorridor = new GetRoadsAlignmentsFromCorridors(
                         ts, editor,
                         intersectionDB.corridor.corr1,
                         intersectionDB.corridor.corr2);
 
+                    CreateRightTurnAlignments createRightTurnAlignments = new CreateRightTurnAlignments(ts, database, civilDocument);
 
+                    AddProfileForRightTurnAL addProfileForRightTurnAL = new AddProfileForRightTurnAL(ts, civilDocument);
+
+                    CutMainRoadCorridor cutMainRoadCorridor = new CutMainRoadCorridor(ts, civilDocument);
+
+                    CreateRightTurnCorridors createRightTurnCorridors = new CreateRightTurnCorridors(ts, civilDocument);
                     #endregion
+
+                    ts.Commit();
                 }
                 catch (System.Exception ex)
                 {
@@ -59,7 +66,6 @@ namespace SolveIntersection
                     ts.Abort();
                     #endregion
                 }
-                ts.Commit();
             }
         }
     }
