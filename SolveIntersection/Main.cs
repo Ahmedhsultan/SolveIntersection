@@ -6,6 +6,7 @@ using Autodesk.AutoCAD.Runtime;
 using Autodesk.Civil.ApplicationServices;
 using Autodesk.Civil.DatabaseServices;
 using SolveIntersection.DB;
+using SolveIntersection.DB.Entities;
 using SolveIntersection.Servicies;
 using SolveIntersection.Util;
 #endregion
@@ -31,30 +32,30 @@ namespace SolveIntersection
                     IntersectionDB intersectionDB = IntersectionDB.getInstance();
                     #endregion
                     #region Selection
-                    intersectionDB.corridor.corr1 = Select.cadEntity<Corridor>(ts, editor, "Select First Corridor");
-                    intersectionDB.corridor.corr2 = Select.cadEntity<Corridor>(ts, editor, "Select Secound Corridor");
+                    intersectionDB.road_Main.corridor = Select.cadEntity<Corridor>(ts, editor, "Select Main Road Corridor");
+                    intersectionDB.road_Secondary.corridor = Select.cadEntity<Corridor>(ts, editor, "Select Secondary Road Corridor");
 
-                    intersectionDB.polylinesDB.polyline1 = Select.cadEntity<Polyline>(ts, editor, "Select right turn 1");
-                    intersectionDB.polylinesDB.polyline2 = Select.cadEntity<Polyline>(ts, editor, "Select right turn 2");
-                    /*intersectionDB.polylinesDB.polyline3 = Select.cadEntity<Polyline>(ts, editor, "Select right turn 3");
-                    intersectionDB.polylinesDB.polyline4 = Select.cadEntity<Polyline>(ts, editor, "Select right turn 4");*/
+                    intersectionDB.selection.polyline1 = Select.cadEntity<Polyline>(ts, editor, "Select right turn 1");
+                    intersectionDB.selection.polyline2 = Select.cadEntity<Polyline>(ts, editor, "Select right turn 2");
                     #endregion
 
                     #region Algorithm
-                    CreateAssembly createAssembly = new CreateAssembly(ts, database);
+                    new CreateAssembly<Road_Main>(ts, database, intersectionDB.road_Main);
+                    new CreateAssembly<Road_Secondary>(ts, database, intersectionDB.road_Secondary);
 
-                    GetRoadsAlignmentsFromCorridors getAlignmentFromCorridor = new GetRoadsAlignmentsFromCorridors(
-                        ts, editor,
-                        intersectionDB.corridor.corr1,
-                        intersectionDB.corridor.corr2);
+                    new GetRoadsAlignmentsFromCorridors(ts, editor, intersectionDB.road_Main.corridor, intersectionDB.road_Secondary.corridor);
 
-                    CreateRightTurnAlignments createRightTurnAlignments = new CreateRightTurnAlignments(ts, database, civilDocument);
+                    new DetectRoadComponents<Road_Main>(ts, database, civilDocument, intersectionDB.road_Main);
+                    new DetectRoadComponents<Road_Secondary>(ts, database, civilDocument, intersectionDB.road_Secondary);
 
-                    AddProfileForRightTurnAL addProfileForRightTurnAL = new AddProfileForRightTurnAL(ts, civilDocument);
+                    new CreateRightTurnAlignments(ts, database, civilDocument);
 
-                    CutMainRoadCorridor cutMainRoadCorridor = new CutMainRoadCorridor(ts, civilDocument);
+                    new AddProfileForRightTurnAL(ts, civilDocument);
 
-                    CreateRightTurnCorridors createRightTurnCorridors = new CreateRightTurnCorridors(ts, civilDocument);
+                    new CutMainRoadCorridor(ts, civilDocument);
+
+                    new CreateRightTurnCorridors<RightTurn1>(ts, civilDocument, intersectionDB.rightTurn1);
+                    new CreateRightTurnCorridors<RightTurn2>(ts, civilDocument, intersectionDB.rightTurn2);
                     #endregion
 
                     ts.Commit();

@@ -16,14 +16,14 @@ namespace SolveIntersection.Servicies
     {
         public CreateRightTurnAlignments(Transaction ts, Database database, CivilDocument civdoc)
         {
-            Polyline polyline1 = IntersectionDB.getInstance().polylinesDB.polyline1;
-            Polyline polyline2 = IntersectionDB.getInstance().polylinesDB.polyline2;
+            Polyline polyline1 = IntersectionDB.getInstance().selection.polyline1;
+            Polyline polyline2 = IntersectionDB.getInstance().selection.polyline2;
 
             Alignment alignment1 = createAlignment(ts, database, civdoc, polyline1);
             Alignment alignment2 = createAlignment(ts, database, civdoc, polyline2);
 
-            IntersectionDB.getInstance().alignment.al1R = alignment1;
-            IntersectionDB.getInstance().alignment.al1L = alignment2;
+            IntersectionDB.getInstance().rightTurn1.alignment = alignment1;
+            IntersectionDB.getInstance().rightTurn2.alignment = alignment2;
 
             ts.Commit();
             ts = database.TransactionManager.StartOpenCloseTransaction();

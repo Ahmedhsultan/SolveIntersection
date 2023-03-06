@@ -1,4 +1,5 @@
 ﻿using Autodesk.Civil.DatabaseServices;
+using SolveIntersection.DB.Entities.Beans;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,7 @@ using System.Threading.Tasks;
 
 namespace SolveIntersection.DB.Entities
 {
-    internal class AlignmentDB
+    internal class Road_Secondary : Road
     {
-        public Alignment al1R { get; set; }
-        public Alignment al1L { get; set; }
-        public Alignment al2R { get; set; }
-        public Alignment al2L { get; set; }
     }
 }

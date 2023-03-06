@@ -56,12 +56,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DB\Entities\Beans\AssemblyList.cs" />
+    <Compile Include="DB\Entities\Beans\Direction.cs" />
     <Compile Include="DB\Entities\DataDB.cs" />
-    <Compile Include="DB\Entities\PolylinesDB.cs" />
+    <Compile Include="DB\Entities\Beans\Meta_Data.cs" />
+    <Compile Include="DB\Entities\IRoad.cs" />
+    <Compile Include="DB\Entities\Road_Main.cs" />
+    <Compile Include="DB\Entities\RightTurn2.cs" />
+    <Compile Include="DB\Entities\RightTurn1.cs" />
+    <Compile Include="DB\Entities\Road_Secondary.cs" />
     <Compile Include="Main.cs" />
-    <Compile Include="DB\Entities\AlignmentDB.cs" />
-    <Compile Include="DB\Entities\AssemblyDB.cs" />
-    <Compile Include="DB\Entities\CorridorDB.cs" />
+    <Compile Include="DB\Entities\Selection.cs" />
     <Compile Include="DB\IntersectionDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicies\AddProfileForRightTurnAL.cs" />
@@ -69,6 +74,7 @@
     <Compile Include="Servicies\CreateRightTurnAlignments.cs" />
     <Compile Include="Servicies\CreateRightTurnCorridors.cs" />
     <Compile Include="Servicies\CutMainRoadCorridor.cs" />
+    <Compile Include="Servicies\DetectRoadComponents.cs" />
     <Compile Include="Util\DetectIntersecionPoint.cs" />
     <Compile Include="Servicies\GetRoadsAlignmentsFromCorridors.cs" />
     <Compile Include="Util\Select.cs" />

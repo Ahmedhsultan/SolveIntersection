@@ -4,45 +4,45 @@ using Autodesk.AutoCAD.Geometry;
 using Autodesk.Civil.DatabaseServices;
 using Autodesk.Civil.Runtime;
 using SolveIntersection.DB;
+using SolveIntersection.DB.Entities;
+using SolveIntersection.DB.Entities.Beans;
 using System;
 
 namespace SolveIntersection.Servicies
 {
-    internal class CreateAssembly
+    internal class CreateAssembly <T> where T : Road
     {
         public int displacement { get; set; }
-        public CreateAssembly(Transaction ts, Database database)
+        public CreateAssembly(Transaction ts, Database database, T road)
         {
-            //Get Database
-            IntersectionDB intersectionDB = IntersectionDB.getInstance();
-
-            foreach (var baseline in intersectionDB.corridor.corr1.Baselines)
+            foreach (var baseline in road.corridor.Baselines)
             {
                 foreach (var region in baseline.BaselineRegions)
                 {
                     Assembly assbly = ts.GetObject(region.AssemblyId, OpenMode.ForRead) as Assembly;
+                    road.assemblyList.mainAss = assbly;
 
                     //Create R1
                     Assembly copiedAssemblyRight = copyAssembly(assbly, ts, "Right", database);
                     deleteSide(copiedAssemblyRight, SubassemblySideType.Left, ts, database);
-                    intersectionDB.assembly.assR1 = copiedAssemblyRight;
+                    road.assemblyList.assR1 = copiedAssemblyRight;
 
                     //Create L1
                     Assembly copiedAssemblyLeft = copyAssembly(assbly, ts, "Left", database);
                     deleteSide(copiedAssemblyLeft, SubassemblySideType.Right, ts, database);
-                    intersectionDB.assembly.assL1 = copiedAssemblyLeft;
+                    road.assemblyList.assL1 = copiedAssemblyLeft;
 
                     //Create CL1
                     Assembly copiedAssemblyCutLeft = copyAssembly(assbly, ts, "RightTurn", database);
                     deleteSide(copiedAssemblyCutLeft, SubassemblySideType.Right, ts, database);
                     mirrorPavement(copiedAssemblyCutLeft, ts, database);
-                    intersectionDB.assembly.assCL1 = copiedAssemblyCutLeft;
+                    road.assemblyList.assCL1 = copiedAssemblyCutLeft;
 
                     //Create CR1
                     Assembly copiedAssemblyCutRight = copyAssembly(assbly, ts, "LeftTurn", database);
                     deleteSide(copiedAssemblyCutRight, SubassemblySideType.Left, ts, database);
                     mirrorPavement(copiedAssemblyCutRight, ts, database);
-                    intersectionDB.assembly.assCR1 = copiedAssemblyCutRight;
+                    road.assemblyList.assCR1 = copiedAssemblyCutRight;
                 }
             }
 
@@ -52,8 +52,13 @@ namespace SolveIntersection.Servicies
 
         public void mirrorPavement (Assembly copiedAssembly, Transaction ts, Database database)
         {
+            //Open copiedAssembly for write
             ts.GetObject(copiedAssembly.ObjectId, OpenMode.ForWrite);
-            Subassembly firstSubassembly = getFirstSubassembly(copiedAssembly, ts, database);
+
+            //Get first subassembly
+            Subassembly firstSubassembly = getFirstSubassembly(copiedAssembly, ts);
+
+            //Detect all sameller subassemblies and mirror them
             foreach (AssemblyGroup assemblyGroup in copiedAssembly.Groups)
             {
                 foreach (ObjectId subassemblyid in assemblyGroup.GetSubassemblyIds())
@@ -80,7 +85,7 @@ namespace SolveIntersection.Servicies
                 }
             }
         }
-        public Subassembly getFirstSubassembly(Assembly copiedAssembly, Transaction ts, Database database)
+        public Subassembly getFirstSubassembly(Assembly copiedAssembly, Transaction ts)
         {
             Point3d assymbly_Origin = copiedAssembly.Location;
             Subassembly firstSubassembly = null;
@@ -123,7 +128,7 @@ namespace SolveIntersection.Servicies
             database.DeepCloneObjects(new ObjectIdCollection() { assembly.ObjectId }, database.CurrentSpaceId, mapping, false);
 
             Assembly copiedAss = ts.GetObject(mapping.Lookup(assembly.ObjectId).Value, OpenMode.ForWrite) as Assembly;
-            copiedAss.Name = assembly.Name + " (" + name + ")";
+            //copiedAss.Name = assembly.Name + " (" + name + ")";
 
             // Move the assembly geometry
             displacement += 3;

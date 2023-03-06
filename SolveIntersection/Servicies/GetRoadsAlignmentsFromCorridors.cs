@@ -40,8 +40,8 @@ namespace SolveIntersection.Servicies
                 }
             }
 
-            IntersectionDB.getInstance().corridor.alignment1 = intersectedAlignments[minDistPoint][0];
-            IntersectionDB.getInstance().corridor.alignment2 = intersectedAlignments[minDistPoint][1];
+            IntersectionDB.getInstance().road_Main.alignment = intersectedAlignments[minDistPoint][0];
+            IntersectionDB.getInstance().road_Secondary.alignment = intersectedAlignments[minDistPoint][1];
             IntersectionDB.getInstance().data.intersectionPoint = minDistPoint;
         }
     }

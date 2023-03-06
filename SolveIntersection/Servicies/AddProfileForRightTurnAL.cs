@@ -10,8 +10,8 @@ namespace SolveIntersection.Servicies
     {
         public AddProfileForRightTurnAL(Transaction ts, CivilDocument civilDoc)
         {
-            Alignment alignment1 = IntersectionDB.getInstance().alignment.al1R;
-            Alignment alignment2 = IntersectionDB.getInstance().alignment.al1L;
+            Alignment alignment1 = IntersectionDB.getInstance().rightTurn1.alignment;
+            Alignment alignment2 = IntersectionDB.getInstance().rightTurn2.alignment;
 
             // prepare the input parameters
             ObjectId layerId = alignment1.LayerId;

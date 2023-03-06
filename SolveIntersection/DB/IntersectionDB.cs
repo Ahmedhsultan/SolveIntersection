@@ -6,18 +6,21 @@ namespace SolveIntersection.DB
     {
         private static IntersectionDB Instance { get; set; }
 
-        public AssemblyDB assembly { get; set; }
-        public AlignmentDB alignment { get; set; }
-        public CorridorDB corridor { get; set; }
         public DataDB data { get; set; }
-        public PolylinesDB polylinesDB { get; set; }
+        public Selection selection { get; set; }
+        public Road_Main road_Main { get; set; }
+        public Road_Secondary road_Secondary { get; set; }
+        public RightTurn1 rightTurn1 { get; set; }
+        public RightTurn2 rightTurn2 { get; set; }
+
         private IntersectionDB()
         {
-            assembly = new AssemblyDB();
-            alignment = new AlignmentDB();
-            corridor = new CorridorDB();
             data = new DataDB();
-            polylinesDB = new PolylinesDB();
+            selection = new Selection();
+            road_Main = new Road_Main();
+            road_Secondary = new Road_Secondary();
+            rightTurn1 = new RightTurn1();
+            rightTurn2 = new RightTurn2();
         }
 
         public static IntersectionDB getInstance()
