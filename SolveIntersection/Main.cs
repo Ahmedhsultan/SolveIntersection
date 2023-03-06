@@ -50,7 +50,8 @@ namespace SolveIntersection
 
                     new CreateRightTurnAlignments(ts, database, civilDocument);
 
-                    new AddProfileForRightTurnAL(ts, civilDocument);
+                    new AddProfileForRightTurnAL<RightTurn1>(ts, civilDocument, intersectionDB.rightTurn1);
+                    new AddProfileForRightTurnAL<RightTurn2>(ts, civilDocument, intersectionDB.rightTurn2);
 
                     new CutMainRoadCorridor(ts, civilDocument);
 

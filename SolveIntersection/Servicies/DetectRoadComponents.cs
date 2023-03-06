@@ -107,25 +107,5 @@ namespace SolveIntersection.Servicies
 
             return width;
         }
-
-/*      public Subassembly getFirstSubassembly(Assembly Assembly, Transaction ts)
-        {
-            Point3d assymbly_Origin = Assembly.Location;
-            Subassembly firstSubassembly = null;
-            foreach (AssemblyGroup assemblyGroup in Assembly.Groups)
-            {
-                foreach (ObjectId subassemblyid in assemblyGroup.GetSubassemblyIds())
-                {
-                    try
-                    {
-                        Subassembly subassembly = ts.GetObject(subassemblyid, OpenMode.ForWrite) as Subassembly;
-                        if (assymbly_Origin == subassembly.Origin)
-                            firstSubassembly = subassembly;
-                    }
-                    catch (Exception) { }
-                }
-            }
-            return firstSubassembly;
-        }*/
     }
 }

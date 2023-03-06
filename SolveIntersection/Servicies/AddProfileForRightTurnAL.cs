@@ -3,18 +3,16 @@ using Autodesk.AutoCAD.Geometry;
 using Autodesk.Civil.ApplicationServices;
 using Autodesk.Civil.DatabaseServices;
 using SolveIntersection.DB;
+using SolveIntersection.DB.Entities;
 
 namespace SolveIntersection.Servicies
 {
-    internal class AddProfileForRightTurnAL
+    internal class AddProfileForRightTurnAL <T> where T : Road
     {
-        public AddProfileForRightTurnAL(Transaction ts, CivilDocument civilDoc)
+        public AddProfileForRightTurnAL(Transaction ts, CivilDocument civilDoc, T road)
         {
-            Alignment alignment1 = IntersectionDB.getInstance().rightTurn1.alignment;
-            Alignment alignment2 = IntersectionDB.getInstance().rightTurn2.alignment;
-
             // prepare the input parameters
-            ObjectId layerId = alignment1.LayerId;
+            ObjectId layerId = road.alignment.LayerId;
 
             // let's get the 1st Profile style object in the DWG file
             ObjectId styleId = civilDoc.Styles.ProfileStyles[0];
@@ -23,10 +21,10 @@ namespace SolveIntersection.Servicies
             ObjectId labelSetId = civilDoc.Styles.LabelSetStyles.ProfileLabelSetStyles[0];
 
             // Create the Profile Object
-            ObjectId profileId = Profile.CreateByLayout("Profile_Created_using_API", alignment1.ObjectId, layerId, styleId, labelSetId);
+            ObjectId profileId = Profile.CreateByLayout("Profile_Created_using_API", road.alignment.ObjectId, layerId, styleId, labelSetId);
             Profile profile = ts.GetObject(profileId, OpenMode.ForWrite) as Profile;
 
-            Point3d startPoint = new Point3d(alignment1.StartingStation, -40, 0);
+            Point3d startPoint = new Point3d(road.alignment.StartingStation, -40, 0);
             Point3d endPoint = new Point3d(758.2, -70, 0);
             ProfileTangent oTangent1 = profile.Entities.AddFixedTangent(startPoint, endPoint);
 
