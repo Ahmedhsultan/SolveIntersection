@@ -21,12 +21,12 @@ namespace SolveIntersection.Servicies
             Alignment alignment2 = createAlignment(ts, database, civdoc, polyline2);
 
             //Make start of alignment parallel to the secoundary road so it will start from the secoundry road 
-            adjestDirection(ts, database, alignment1.Id);
-            adjestDirection(ts, database, alignment2.Id);
+            adjestDirection(ts, database, alignment1);
+            adjestDirection(ts, database, alignment2);
 
             //Add to database
             //Calculate crossproduct between start vector of rightturn1 and first point in rightturn2 to detect if on right or left by z sign
-            Vector3d vectorStartPointRightTurn1 = alignment1.StartPoint.GetAsVector();
+            Vector3d vectorStartPointRightTurn1 = alignment1.StartPoint.GetVectorTo(alignment1.GetPointAtDist(0.1));
             Point3d p1 = alignment1.StartPoint;
             Point3d p2 = alignment2.StartPoint;
             Vector3d vectorOfPoint = new Vector3d(p2.X - p1.X, p2.Y - p1.Y, p2.Z - p1.Z);
@@ -42,6 +42,10 @@ namespace SolveIntersection.Servicies
                 IntersectionDB.getInstance().rightTurn1.alignment = alignment2;
                 IntersectionDB.getInstance().rightTurn2.alignment = alignment1;
             }
+
+            //Reverse alignment again
+            reverseAlignment(ts, alignment1.Id);
+            reverseAlignment(ts, alignment2.Id);
 
             ts.Commit();
             //ts = database.TransactionManager.StartOpenCloseTransaction();
@@ -79,10 +83,9 @@ namespace SolveIntersection.Servicies
             return alignment;
         }
 
-        private void adjestDirection(Transaction trans, Database database, ObjectId alignmentId)
+        private void adjestDirection(Transaction trans, Database database, Alignment alignment)
         {
             //Get alginment of right turn and secoundary road
-            Alignment alignment = trans.GetObject(alignmentId, OpenMode.ForWrite) as Alignment;
             Alignment alignmentSecoundryRoad = IntersectionDB.getInstance().road_Secondary.alignment;
 
             //Get vector of start secoundary road and start-end right turn road
@@ -98,10 +101,15 @@ namespace SolveIntersection.Servicies
 
             //Check if andgel of start vector bigger than end vector so its start prependacular and end is parallel and we need to reverse alignment
             if (vectorRightTurnStart.GetAngleTo(vectorAlignmentSecoundryRoad) > vectorRightTurnEnd.GetAngleTo(vectorAlignmentSecoundryRoad))
-                alignment.Reverse();
+                reverseAlignment(trans, alignment.Id);
+        }
+
+        public void reverseAlignment(Transaction trans, ObjectId alignmentId)
+        {
+            Alignment alignment = trans.GetObject(alignmentId, OpenMode.ForWrite) as Alignment;
+            alignment.Reverse();
 
             trans.Commit();
-            //trans = database.TransactionManager.StartOpenCloseTransaction();
         }
 
         /*private void adjestDirection(Transaction trans, Database database, ObjectId alignmentId)

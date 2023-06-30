@@ -30,5 +30,10 @@ namespace SolveIntersection.DB
 
             return Instance;
         }
+
+        public static void clearInstance()
+        {
+            Instance = null;
+        }
     }
 }

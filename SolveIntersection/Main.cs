@@ -30,6 +30,7 @@ namespace SolveIntersection
                 try
                 {
                     #region CreateDB
+                    IntersectionDB.clearInstance();
                     IntersectionDB intersectionDB = IntersectionDB.getInstance();
                     #endregion
                     #region Selection
@@ -56,8 +57,8 @@ namespace SolveIntersection
 
                     new CutMainRoadCorridor(ts, civilDocument);
 
-                    new CreateRightTurnCorridors<RightTurn1>(ts, civilDocument, intersectionDB.rightTurn1, IntersectionDB.getInstance().road_Secondary.assemblyList.assCR1);
-                    new CreateRightTurnCorridors<RightTurn2>(ts, civilDocument, intersectionDB.rightTurn2, IntersectionDB.getInstance().road_Secondary.assemblyList.assCL1);
+                    new CreateRightTurnCorridors<RightTurn1>(ts, civilDocument, intersectionDB.rightTurn1, IntersectionDB.getInstance().road_Secondary.assemblyList.assCL1);
+                    new CreateRightTurnCorridors<RightTurn2>(ts, civilDocument, intersectionDB.rightTurn2, IntersectionDB.getInstance().road_Secondary.assemblyList.assCR1);
                     #endregion
 
                     ts.Commit();
