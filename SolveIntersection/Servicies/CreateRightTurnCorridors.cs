@@ -3,15 +3,16 @@ using Autodesk.Civil.ApplicationServices;
 using Autodesk.Civil.DatabaseServices;
 using SolveIntersection.DB;
 using SolveIntersection.DB.Entities;
+using System;
 
 namespace SolveIntersection.Servicies
 {
     internal class CreateRightTurnCorridors<T> where T : Road
     {
-        public CreateRightTurnCorridors(Transaction trans, CivilDocument civilDoc, T road)
+        public CreateRightTurnCorridors(Transaction trans, CivilDocument civilDoc, T road, Assembly assembly)
         {
             // Create a new Corridor
-            ObjectId newCorridorId = civilDoc.CorridorCollection.Add("Corridor 1");
+            ObjectId newCorridorId = civilDoc.CorridorCollection.Add("Corridor " + Guid.NewGuid());
 
             Corridor corridor = trans.GetObject(newCorridorId, OpenMode.ForWrite) as Corridor;
 
@@ -25,7 +26,7 @@ namespace SolveIntersection.Servicies
             Baseline baseline = corridor.Baselines.Add("New Baseline", alignment.ObjectId, profileId);
 
             //Add region
-            BaselineRegion baselineRegion = baseline.BaselineRegions.Add("Rgeion", IntersectionDB.getInstance().road_Secondary.assemblyList.assCL1.Id);
+            BaselineRegion baselineRegion = baseline.BaselineRegions.Add("Rgeion", assembly.Id);
 
             //Edit Frequence
             baselineRegion.AppliedAssemblySetting.FrequencyAlongCurves = 0.1;

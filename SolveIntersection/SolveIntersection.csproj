@@ -61,6 +61,7 @@
     <Compile Include="DB\Entities\DataDB.cs" />
     <Compile Include="DB\Entities\Beans\Meta_Data.cs" />
     <Compile Include="DB\Entities\IRoad.cs" />
+    <Compile Include="DB\Entities\RightTurn.cs" />
     <Compile Include="DB\Entities\Road_Main.cs" />
     <Compile Include="DB\Entities\RightTurn2.cs" />
     <Compile Include="DB\Entities\RightTurn1.cs" />

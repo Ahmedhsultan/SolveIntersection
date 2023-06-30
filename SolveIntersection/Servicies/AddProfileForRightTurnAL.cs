@@ -25,7 +25,7 @@ namespace SolveIntersection.Servicies
             Profile profile = ts.GetObject(profileId, OpenMode.ForWrite) as Profile;
 
             Point3d startPoint = new Point3d(road.alignment.StartingStation, -40, 0);
-            Point3d endPoint = new Point3d(758.2, -70, 0);
+            Point3d endPoint = new Point3d(road.alignment.EndingStation, -50, 0);
             ProfileTangent oTangent1 = profile.Entities.AddFixedTangent(startPoint, endPoint);
 
 

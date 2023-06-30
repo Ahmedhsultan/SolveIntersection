@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SolveIntersection.DB.Entities
 {
-    internal class RightTurn2 : Road
+    internal class RightTurn2 : RightTurn
     {
     }
 }
