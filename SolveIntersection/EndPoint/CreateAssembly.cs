@@ -47,7 +47,6 @@ namespace SolveIntersection.EndPoint
             }
 
             ts.Commit();
-            ts = database.TransactionManager.StartOpenCloseTransaction();
         }
 
         public void mirrorPavement (Assembly copiedAssembly, Transaction ts, Database database)
@@ -118,7 +117,6 @@ namespace SolveIntersection.EndPoint
                 }
             }
             ts.Commit();
-            ts = database.TransactionManager.StartOpenCloseTransaction();
         }
 
         public Assembly copyAssembly(Assembly assembly, Transaction ts, String name, Database database)

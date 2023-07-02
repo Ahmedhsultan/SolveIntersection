@@ -1,4 +1,5 @@
-﻿using SolveIntersection.DB.Entities.Beans;
+﻿using Autodesk.Civil.DatabaseServices;
+using SolveIntersection.DB.Entities.Beans;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace SolveIntersection.DB.Entities
     public class Road : RoadComponent
     {
         public Meta_Data_Road meta_Data { get; set; }
+        public BaselineRegion baselineRegion { get; set; }
 
         public Road()
         {

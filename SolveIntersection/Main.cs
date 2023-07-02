@@ -2,20 +2,23 @@
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.EditorInput;
+using Autodesk.AutoCAD.Geometry;
 using Autodesk.AutoCAD.Runtime;
 using Autodesk.Civil.ApplicationServices;
 using Autodesk.Civil.DatabaseServices;
 using SolveIntersection.DB;
 using SolveIntersection.DB.Entities;
+using SolveIntersection.DTO;
 using SolveIntersection.EndPoint;
 using SolveIntersection.Util;
-using SolveIntersection.DB.Entities.Beans;
+using System.Collections.Generic;
 #endregion
 
 namespace SolveIntersection
 {
     public class Main
     {
+        
         [CommandMethod("dar_solveIntersection")]
         public static void main()
         {
@@ -34,11 +37,14 @@ namespace SolveIntersection
                     IntersectionDB intersectionDB = IntersectionDB.getInstance();
                     #endregion
                     #region Selection
-                    intersectionDB.road_Main.corridor = Select.cadEntity<Corridor>(ts, editor, "Select Main Road Corridor");
-                    intersectionDB.road_Secondary.corridor = Select.cadEntity<Corridor>(ts, editor, "Select Secondary Road Corridor");
+                    intersectionDB.road_Main.corridor = Select.entity<Corridor>(ts, editor, "Select Main Road Corridor");
+                    intersectionDB.road_Secondary.corridor = Select.entity<Corridor>(ts, editor, "Select Secondary Road Corridor");
 
-                    intersectionDB.selection.polyline1 = Select.cadEntity<Polyline>(ts, editor, "Select right turn 1");
-                    intersectionDB.selection.polyline2 = Select.cadEntity<Polyline>(ts, editor, "Select right turn 2");
+                    intersectionDB.road_Main.baselineRegion = Select.region("Select Main Road Corridor");
+                    intersectionDB.road_Secondary.baselineRegion = Select.region("Select Secondary Road Corridor");
+
+                    intersectionDB.selection.polyline1 = Select.entity<Polyline>(ts, editor, "Select right turn 1");
+                    intersectionDB.selection.polyline2 = Select.entity<Polyline>(ts, editor, "Select right turn 2");
                     #endregion
 
                     #region Algorithm
@@ -52,7 +58,6 @@ namespace SolveIntersection
                     new DetectRoadComponents(ts, database, civilDocument, intersectionDB.road_Main, intersectionDB.rightTurn_Right);
                     new DetectRoadComponents(ts, database, civilDocument, intersectionDB.road_Secondary, intersectionDB.rightTurn_Right);
 
-                    //Adjust alignment length
                     createRightTurnAlignments.adjustAlignmnetLength(ts, intersectionDB.rightTurn_Right);
                     createRightTurnAlignments.adjustAlignmnetLength(ts, intersectionDB.rightTurn_Left);
 

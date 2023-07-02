@@ -65,6 +65,7 @@
     <Compile Include="DB\Entities\Road.cs" />
     <Compile Include="DB\Entities\RoadComponent.cs" />
     <Compile Include="DB\Entities\RightTurn.cs" />
+    <Compile Include="DTO\OffsetPoints.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="DB\Entities\Selection.cs" />
     <Compile Include="DB\IntersectionDB.cs" />
@@ -76,8 +77,10 @@
     <Compile Include="EndPoint\CutMainRoadCorridor.cs" />
     <Compile Include="EndPoint\DetectRoadComponents.cs" />
     <Compile Include="Service\IntersecionService.cs" />
+    <Compile Include="Util\CursorStopEventHandler.cs" />
     <Compile Include="Util\DetectIntersecionPoint.cs" />
     <Compile Include="EndPoint\GetRoadsAlignmentsFromCorridors.cs" />
+    <Compile Include="Util\Math.cs" />
     <Compile Include="Util\Select.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

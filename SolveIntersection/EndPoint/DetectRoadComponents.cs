@@ -88,7 +88,7 @@ namespace SolveIntersection.EndPoint
                         {
                             //Reverse slope
                             ParamDoubleCollection paramsDouble = subassembly.ParamsDouble;
-                            ParamDouble slopeKey = paramsDouble["sideSlope"];
+                            ParamDouble slopeKey = paramsDouble["DefaultSlope"];
                             slope = slopeKey.Value;
                             break;
                         }

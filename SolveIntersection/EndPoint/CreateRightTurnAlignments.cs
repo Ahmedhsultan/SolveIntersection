@@ -100,7 +100,7 @@ namespace SolveIntersection.EndPoint
                     break;
                 default: throw new Exception("The right turn side isnt assigned");
             }
-            double length = (mainRoadSlope - sideSlope) * 10;
+            double length = ((mainRoadSlope*100) - (sideSlope*100)) * 10;
 
             return length;
         }
