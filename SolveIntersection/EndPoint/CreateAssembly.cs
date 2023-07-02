@@ -8,12 +8,12 @@ using SolveIntersection.DB.Entities;
 using SolveIntersection.DB.Entities.Beans;
 using System;
 
-namespace SolveIntersection.Servicies
+namespace SolveIntersection.EndPoint
 {
-    internal class CreateAssembly <T> where T : Road
+    internal class CreateAssembly
     {
         public int displacement { get; set; }
-        public CreateAssembly(Transaction ts, Database database, T road)
+        public CreateAssembly(Transaction ts, Database database, Road road)
         {
             foreach (var baseline in road.corridor.Baselines)
             {

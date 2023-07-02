@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace SolveIntersection.DB.Entities
 {
-    public class RightTurn : RoadComponent
+    public class Road : RoadComponent
     {
-        public Meta_Data_Righturn meta_Data { get; set; }
+        public Meta_Data_Road meta_Data { get; set; }
 
-        public RightTurn()
+        public Road()
         {
-            meta_Data = new Meta_Data_Righturn();
+            meta_Data = new Meta_Data_Road();
         }
     }
 }

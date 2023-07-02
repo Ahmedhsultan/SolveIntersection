@@ -57,27 +57,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DB\Entities\Beans\AssemblyList.cs" />
+    <Compile Include="DB\Entities\Beans\Meta_Data_Righturn.cs" />
     <Compile Include="DB\Entities\Beans\Direction.cs" />
+    <Compile Include="DB\Entities\Beans\Side.cs" />
     <Compile Include="DB\Entities\DataDB.cs" />
-    <Compile Include="DB\Entities\Beans\Meta_Data.cs" />
-    <Compile Include="DB\Entities\IRoad.cs" />
+    <Compile Include="DB\Entities\Beans\Meta_Data_Road.cs" />
+    <Compile Include="DB\Entities\Road.cs" />
+    <Compile Include="DB\Entities\RoadComponent.cs" />
     <Compile Include="DB\Entities\RightTurn.cs" />
-    <Compile Include="DB\Entities\Road_Main.cs" />
-    <Compile Include="DB\Entities\RightTurn2.cs" />
-    <Compile Include="DB\Entities\RightTurn1.cs" />
-    <Compile Include="DB\Entities\Road_Secondary.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="DB\Entities\Selection.cs" />
     <Compile Include="DB\IntersectionDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Servicies\AddProfileForRightTurnAL.cs" />
-    <Compile Include="Servicies\CreateAssembly.cs" />
-    <Compile Include="Servicies\CreateRightTurnAlignments.cs" />
-    <Compile Include="Servicies\CreateRightTurnCorridors.cs" />
-    <Compile Include="Servicies\CutMainRoadCorridor.cs" />
-    <Compile Include="Servicies\DetectRoadComponents.cs" />
+    <Compile Include="EndPoint\AddProfileForRightTurnAL.cs" />
+    <Compile Include="EndPoint\CreateAssembly.cs" />
+    <Compile Include="EndPoint\CreateRightTurnAlignments.cs" />
+    <Compile Include="EndPoint\CreateRightTurnCorridors.cs" />
+    <Compile Include="EndPoint\CutMainRoadCorridor.cs" />
+    <Compile Include="EndPoint\DetectRoadComponents.cs" />
+    <Compile Include="Service\IntersecionService.cs" />
     <Compile Include="Util\DetectIntersecionPoint.cs" />
-    <Compile Include="Servicies\GetRoadsAlignmentsFromCorridors.cs" />
+    <Compile Include="EndPoint\GetRoadsAlignmentsFromCorridors.cs" />
     <Compile Include="Util\Select.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SolveIntersection.Servicies
+namespace SolveIntersection.EndPoint
 {
     internal class CutMainRoadCorridor
     {
@@ -17,8 +17,8 @@ namespace SolveIntersection.Servicies
             Corridor corridor = IntersectionDB.getInstance().road_Main.corridor;
             Alignment alignment = IntersectionDB.getInstance().road_Main.alignment;
 
-            Alignment rightTurn = IntersectionDB.getInstance().rightTurn1.alignment;
-            Alignment leftTurn = IntersectionDB.getInstance().rightTurn2.alignment;
+            Alignment rightTurn = IntersectionDB.getInstance().rightTurn_Right.alignment;
+            Alignment leftTurn = IntersectionDB.getInstance().rightTurn_Left.alignment;
 
             /*foreach (Baseline baseline in corridor.Baselines)
                 if(baseline.AlignmentId == alignment.Id)

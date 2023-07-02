@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SolveIntersection.DB.Entities.Beans
 {
-    public enum Direction
+    public class Meta_Data_Righturn
     {
-        FORWORD,
-        BACKWORD
+        public Side side { get; set; }
+        public double length { get; set; }
     }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SolveIntersection.DB.Entities.Beans
 {
-    public enum Direction
+    public enum Side
     {
-        FORWORD,
-        BACKWORD
+        RIGHT,
+        LEFT
     }
 }

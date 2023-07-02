@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SolveIntersection.DB.Entities
 {
-    internal class Selection
+    public class Selection
     {
         public Polyline polyline1 { get; set; }
         public Polyline polyline2 { get; set; }

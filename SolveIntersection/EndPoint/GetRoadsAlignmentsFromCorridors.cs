@@ -6,7 +6,7 @@ using SolveIntersection.DB;
 using SolveIntersection.Util;
 using System.Collections.Generic;
 
-namespace SolveIntersection.Servicies
+namespace SolveIntersection.EndPoint
 {
     internal class GetRoadsAlignmentsFromCorridors
     {

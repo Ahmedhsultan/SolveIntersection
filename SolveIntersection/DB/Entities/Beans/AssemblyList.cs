@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SolveIntersection.DB.Entities.Beans
 {
-    internal class AssemblyList
+    public class AssemblyList
     {
         public Assembly mainAss { get; set; }
         public Assembly assL1 { get; set; }

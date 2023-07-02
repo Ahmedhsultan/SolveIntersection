@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SolveIntersection.DB.Entities
 {
-    internal class DataDB
+    public class DataDB
     {
         public Point3d intersectionPoint { get; set; }
     }

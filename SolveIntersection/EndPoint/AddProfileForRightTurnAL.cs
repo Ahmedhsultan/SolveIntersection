@@ -5,9 +5,9 @@ using Autodesk.Civil.DatabaseServices;
 using SolveIntersection.DB;
 using SolveIntersection.DB.Entities;
 
-namespace SolveIntersection.Servicies
+namespace SolveIntersection.EndPoint
 {
-    internal class AddProfileForRightTurnAL <T> where T : Road
+    internal class AddProfileForRightTurnAL <T> where T : RightTurn
     {
         public AddProfileForRightTurnAL(Transaction ts, CivilDocument civilDoc, T road)
         {

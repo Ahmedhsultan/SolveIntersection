@@ -8,18 +8,16 @@ using System.Threading.Tasks;
 
 namespace SolveIntersection.DB.Entities
 {
-    internal class Road
+    public class RoadComponent
     {
         public Alignment alignment { get; set; }
         public Corridor corridor { get; set; }
         public AssemblyList assemblyList { get; set; }
-        public Meta_Data meta_Data { get; set; }
         public Profile profile { get; set; }
 
-        public Road()
+        public RoadComponent()
         {
             assemblyList = new AssemblyList();
-            meta_Data = new Meta_Data();
         }
     }
 }

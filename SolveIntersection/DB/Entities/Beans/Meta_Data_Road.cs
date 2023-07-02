@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SolveIntersection.DB.Entities.Beans
 {
-    internal class Meta_Data
+    public class Meta_Data_Road
     {
         public double width { get; set; }
         public double rightSlop { get; set; }

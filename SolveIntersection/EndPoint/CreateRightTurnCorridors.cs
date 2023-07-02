@@ -5,9 +5,9 @@ using SolveIntersection.DB;
 using SolveIntersection.DB.Entities;
 using System;
 
-namespace SolveIntersection.Servicies
+namespace SolveIntersection.EndPoint
 {
-    internal class CreateRightTurnCorridors<T> where T : Road
+    internal class CreateRightTurnCorridors<T> where T : RoadComponent
     {
         public CreateRightTurnCorridors(Transaction trans, CivilDocument civilDoc, T road, Assembly assembly)
         {

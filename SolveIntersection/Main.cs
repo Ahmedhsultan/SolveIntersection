@@ -7,7 +7,7 @@ using Autodesk.Civil.ApplicationServices;
 using Autodesk.Civil.DatabaseServices;
 using SolveIntersection.DB;
 using SolveIntersection.DB.Entities;
-using SolveIntersection.Servicies;
+using SolveIntersection.EndPoint;
 using SolveIntersection.Util;
 using SolveIntersection.DB.Entities.Beans;
 #endregion
@@ -42,23 +42,27 @@ namespace SolveIntersection
                     #endregion
 
                     #region Algorithm
-                    new CreateAssembly<Road_Main>(ts, database, intersectionDB.road_Main);
-                    new CreateAssembly<Road_Secondary>(ts, database, intersectionDB.road_Secondary);
+                    new CreateAssembly(ts, database, intersectionDB.road_Main);
+                    new CreateAssembly(ts, database, intersectionDB.road_Secondary);
 
                     new GetRoadsAlignmentsFromCorridors(ts, editor, intersectionDB.road_Main.corridor, intersectionDB.road_Secondary.corridor);
 
-                    new DetectRoadComponents<Road_Main>(ts, database, civilDocument, intersectionDB.road_Main);
-                    new DetectRoadComponents<Road_Secondary>(ts, database, civilDocument, intersectionDB.road_Secondary);
+                    var createRightTurnAlignments = new CreateRightTurnAlignments(ts, database, civilDocument);
 
-                    new CreateRightTurnAlignments(ts, database, civilDocument);
+                    new DetectRoadComponents(ts, database, civilDocument, intersectionDB.road_Main, intersectionDB.rightTurn_Right);
+                    new DetectRoadComponents(ts, database, civilDocument, intersectionDB.road_Secondary, intersectionDB.rightTurn_Right);
 
-                    new AddProfileForRightTurnAL<RightTurn1>(ts, civilDocument, intersectionDB.rightTurn1);
-                    new AddProfileForRightTurnAL<RightTurn2>(ts, civilDocument, intersectionDB.rightTurn2);
+                    //Adjust alignment length
+                    createRightTurnAlignments.adjustAlignmnetLength(ts, intersectionDB.rightTurn_Right);
+                    createRightTurnAlignments.adjustAlignmnetLength(ts, intersectionDB.rightTurn_Left);
+
+                    new AddProfileForRightTurnAL<RightTurn>(ts, civilDocument, intersectionDB.rightTurn_Right);
+                    new AddProfileForRightTurnAL<RightTurn>(ts, civilDocument, intersectionDB.rightTurn_Left);
 
                     new CutMainRoadCorridor(ts, civilDocument);
 
-                    new CreateRightTurnCorridors<RightTurn1>(ts, civilDocument, intersectionDB.rightTurn1, IntersectionDB.getInstance().road_Secondary.assemblyList.assCL1);
-                    new CreateRightTurnCorridors<RightTurn2>(ts, civilDocument, intersectionDB.rightTurn2, IntersectionDB.getInstance().road_Secondary.assemblyList.assCR1);
+                    new CreateRightTurnCorridors<RightTurn>(ts, civilDocument, intersectionDB.rightTurn_Right, intersectionDB.road_Secondary.assemblyList.assCL1);
+                    new CreateRightTurnCorridors<RightTurn>(ts, civilDocument, intersectionDB.rightTurn_Left, intersectionDB.road_Secondary.assemblyList.assCR1);
                     #endregion
 
                     ts.Commit();
