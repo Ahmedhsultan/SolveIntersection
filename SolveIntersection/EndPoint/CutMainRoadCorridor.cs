@@ -14,7 +14,7 @@ namespace SolveIntersection.EndPoint
     {
         public CutMainRoadCorridor(Transaction ts, CivilDocument civilDocument)
         {
-            Corridor corridor = IntersectionDB.getInstance().road_Main.corridor;
+            //Corridor corridor = IntersectionDB.getInstance().road_Main.corridor;
             Alignment alignment = IntersectionDB.getInstance().road_Main.alignment;
 
             Alignment rightTurn = IntersectionDB.getInstance().rightTurn_Right.alignment;

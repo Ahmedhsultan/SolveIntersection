@@ -9,6 +9,6 @@ namespace SolveIntersection.DB.Entities
 {
     public class DataDB
     {
-        public Point3d intersectionPoint { get; set; }
+        //public Point3d intersectionPoint { get; set; }
     }
 }

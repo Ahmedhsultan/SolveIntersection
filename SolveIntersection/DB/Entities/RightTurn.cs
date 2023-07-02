@@ -1,4 +1,5 @@
-﻿using SolveIntersection.DB.Entities.Beans;
+﻿using Autodesk.Civil.DatabaseServices;
+using SolveIntersection.DB.Entities.Beans;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace SolveIntersection.DB.Entities
     public class RightTurn : RoadComponent
     {
         public Meta_Data_Righturn meta_Data { get; set; }
+        public Corridor corridor { get; set; }
 
         public RightTurn()
         {

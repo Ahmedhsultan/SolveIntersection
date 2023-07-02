@@ -11,7 +11,6 @@ namespace SolveIntersection.DB.Entities
     public class RoadComponent
     {
         public Alignment alignment { get; set; }
-        public Corridor corridor { get; set; }
         public AssemblyList assemblyList { get; set; }
         public Profile profile { get; set; }
 

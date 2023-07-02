@@ -18,7 +18,7 @@ namespace SolveIntersection.EndPoint
         public Road road { get; set; }
         public RightTurn rightTurn_RightSide { get; set; }
 
-        public DetectRoadComponents(Transaction ts, Database database, CivilDocument civdoc, Road road, RightTurn rightTurn_RightSide)
+        public DetectRoadComponents(Transaction ts, Road road, RightTurn rightTurn_RightSide)
         {
             this.road = road;
             this.rightTurn_RightSide = rightTurn_RightSide;
@@ -36,6 +36,18 @@ namespace SolveIntersection.EndPoint
 
             //Detect longitudinalSlop
             road.meta_Data.longitudinalSlop = detectRoadLongitudinalSlop(ts);
+        }
+
+        public static void detectAlignment(Transaction ts, Road road)
+        {
+            Corridor corridor = ts.GetObject(road.baselineRegion.CorridorId, OpenMode.ForRead) as Corridor;
+            foreach (var baseline in corridor.Baselines)
+                foreach (var region in baseline.BaselineRegions)
+                    if (region.Name == road.baselineRegion.Name)
+                    {
+                        road.alignment = ts.GetObject(baseline.AlignmentId, OpenMode.ForRead) as Alignment;
+                        return;
+                    }
         }
 
         public void detectRoadDirection()

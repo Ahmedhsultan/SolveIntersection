@@ -15,36 +15,30 @@ namespace SolveIntersection.EndPoint
         public int displacement { get; set; }
         public CreateAssembly(Transaction ts, Database database, Road road)
         {
-            foreach (var baseline in road.corridor.Baselines)
-            {
-                foreach (var region in baseline.BaselineRegions)
-                {
-                    Assembly assbly = ts.GetObject(region.AssemblyId, OpenMode.ForRead) as Assembly;
-                    road.assemblyList.mainAss = assbly;
+            Assembly assbly = ts.GetObject(road.baselineRegion.AssemblyId, OpenMode.ForRead) as Assembly;
+            road.assemblyList.mainAss = assbly;
 
-                    //Create R1
-                    Assembly copiedAssemblyRight = copyAssembly(assbly, ts, "Right", database);
-                    deleteSide(copiedAssemblyRight, SubassemblySideType.Left, ts, database);
-                    road.assemblyList.assR1 = copiedAssemblyRight;
+            //Create R1
+            Assembly copiedAssemblyRight = copyAssembly(assbly, ts, "Right", database);
+            deleteSide(copiedAssemblyRight, SubassemblySideType.Left, ts, database);
+            road.assemblyList.assR1 = copiedAssemblyRight;
 
-                    //Create L1
-                    Assembly copiedAssemblyLeft = copyAssembly(assbly, ts, "Left", database);
-                    deleteSide(copiedAssemblyLeft, SubassemblySideType.Right, ts, database);
-                    road.assemblyList.assL1 = copiedAssemblyLeft;
+            //Create L1
+            Assembly copiedAssemblyLeft = copyAssembly(assbly, ts, "Left", database);
+            deleteSide(copiedAssemblyLeft, SubassemblySideType.Right, ts, database);
+            road.assemblyList.assL1 = copiedAssemblyLeft;
 
-                    //Create CL1
-                    Assembly copiedAssemblyCutLeft = copyAssembly(assbly, ts, "RightTurn", database);
-                    deleteSide(copiedAssemblyCutLeft, SubassemblySideType.Right, ts, database);
-                    mirrorPavement(copiedAssemblyCutLeft, ts, database);
-                    road.assemblyList.assCL1 = copiedAssemblyCutLeft;
+            //Create CL1
+            Assembly copiedAssemblyCutLeft = copyAssembly(assbly, ts, "RightTurn", database);
+            deleteSide(copiedAssemblyCutLeft, SubassemblySideType.Right, ts, database);
+            mirrorPavement(copiedAssemblyCutLeft, ts, database);
+            road.assemblyList.assCL1 = copiedAssemblyCutLeft;
 
-                    //Create CR1
-                    Assembly copiedAssemblyCutRight = copyAssembly(assbly, ts, "LeftTurn", database);
-                    deleteSide(copiedAssemblyCutRight, SubassemblySideType.Left, ts, database);
-                    mirrorPavement(copiedAssemblyCutRight, ts, database);
-                    road.assemblyList.assCR1 = copiedAssemblyCutRight;
-                }
-            }
+            //Create CR1
+            Assembly copiedAssemblyCutRight = copyAssembly(assbly, ts, "LeftTurn", database);
+            deleteSide(copiedAssemblyCutRight, SubassemblySideType.Left, ts, database);
+            mirrorPavement(copiedAssemblyCutRight, ts, database);
+            road.assemblyList.assCR1 = copiedAssemblyCutRight;
 
             ts.Commit();
         }

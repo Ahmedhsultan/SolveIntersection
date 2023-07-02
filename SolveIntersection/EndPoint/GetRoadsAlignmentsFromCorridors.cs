@@ -12,7 +12,7 @@ namespace SolveIntersection.EndPoint
     {
         public GetRoadsAlignmentsFromCorridors(Transaction ts, Editor editor, Corridor corridor1, Corridor corridor2)
         {
-            Dictionary<Point3d, List<Alignment>> intersectedAlignments = new Dictionary<Point3d, List<Alignment>>();
+            /*Dictionary<Point3d, List<Alignment>> intersectedAlignments = new Dictionary<Point3d, List<Alignment>>();
             Point3d clickedPoint = Select.selectPoint(ts, editor);
 
             foreach (var basline1 in corridor1.Baselines)
@@ -42,7 +42,7 @@ namespace SolveIntersection.EndPoint
 
             IntersectionDB.getInstance().road_Main.alignment = intersectedAlignments[minDistPoint][0];
             IntersectionDB.getInstance().road_Secondary.alignment = intersectedAlignments[minDistPoint][1];
-            IntersectionDB.getInstance().data.intersectionPoint = minDistPoint;
+            IntersectionDB.getInstance().data.intersectionPoint = minDistPoint;*/
         }
     }
 }

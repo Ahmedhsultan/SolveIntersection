@@ -27,12 +27,19 @@ namespace SolveIntersection.Util
 
         public static BaselineRegion region(String msg)
         {
-            PromptPointOptions prompt = new PromptPointOptions(msg);
-            Application.DocumentManager.MdiActiveDocument.Editor.PointMonitor += CursorStopEventHandler.doEvent;
-            Application.DocumentManager.MdiActiveDocument.Editor.GetPoint(prompt);
-            Application.DocumentManager.MdiActiveDocument.Editor.PointMonitor -= CursorStopEventHandler.doEvent;
+            BaselineRegion baselineRegion;
 
-            return CursorStopEventHandler.region;
+            do
+            {
+                PromptPointOptions prompt = new PromptPointOptions(msg);
+                Application.DocumentManager.MdiActiveDocument.Editor.PointMonitor += CursorStopEventHandler.doEvent;
+                Application.DocumentManager.MdiActiveDocument.Editor.GetPoint(prompt);
+                Application.DocumentManager.MdiActiveDocument.Editor.PointMonitor -= CursorStopEventHandler.doEvent;
+
+                baselineRegion = CursorStopEventHandler.region;
+            } while (baselineRegion == null);
+
+            return baselineRegion;
         }
 
         public static Point3d selectPoint(Transaction ts, Editor ed)
