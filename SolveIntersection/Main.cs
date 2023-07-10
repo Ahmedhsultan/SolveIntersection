@@ -61,7 +61,9 @@ namespace SolveIntersection
                     new AddProfileForRightTurnAL<RightTurn>(ts, civilDocument, intersectionDB.rightTurn_Right);
                     new AddProfileForRightTurnAL<RightTurn>(ts, civilDocument, intersectionDB.rightTurn_Left);
 
-                    new CutMainRoadCorridor(ts, civilDocument);
+                    new CreateTargetFeatureLine(database, ts, intersectionDB.rightTurn_Right, intersectionDB.rightTurn_Left, intersectionDB.road_Main);
+
+                    //new CutMainRoadCorridor(ts, civilDocument);
 
                     new CreateRightTurnCorridors<RightTurn>(ts, civilDocument, intersectionDB.rightTurn_Right, intersectionDB.road_Secondary.assemblyList.assCL1);
                     new CreateRightTurnCorridors<RightTurn>(ts, civilDocument, intersectionDB.rightTurn_Left, intersectionDB.road_Secondary.assemblyList.assCR1);

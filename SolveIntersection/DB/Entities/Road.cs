@@ -12,6 +12,8 @@ namespace SolveIntersection.DB.Entities
     {
         public Meta_Data_Road meta_Data { get; set; }
         public BaselineRegion baselineRegion { get; set; }
+        public Corridor corridor { get; set; }
+        public CorridorSurface surfaceTop { get; set; }
 
         public Road()
         {

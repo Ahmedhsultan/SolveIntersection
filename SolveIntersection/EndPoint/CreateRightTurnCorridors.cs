@@ -36,7 +36,8 @@ namespace SolveIntersection.EndPoint
             SubassemblyTargetInfoCollection corridorTargets = baselineRegion.GetTargets();
             var ids = new ObjectIdCollection() { 
                 IntersectionDB.getInstance().road_Secondary.alignment.Id,
-                IntersectionDB.getInstance().road_Main.alignment.Id
+                IntersectionDB.getInstance().road_Main.alignment.Id,
+                IntersectionDB.getInstance().data.featureLineTarget.Id
             };
             foreach (SubassemblyTargetInfo target in corridorTargets)
                 if (target.SubassemblyName.Equals("LaneSuperelevationAOR"))

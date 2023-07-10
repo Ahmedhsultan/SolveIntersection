@@ -11,7 +11,6 @@ namespace SolveIntersection.DB.Entities.Beans
         public double width { get; set; }
         public double rightSlop { get; set; }
         public double leftSlop { get; set; }
-        public double longitudinalSlop { get; set; }
         public Direction direction { get; set; }
     }
 }

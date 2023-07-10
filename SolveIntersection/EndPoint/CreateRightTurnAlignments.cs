@@ -80,7 +80,7 @@ namespace SolveIntersection.EndPoint
 
         public double detectAlignmentLength(Road secoundryRoad, RightTurn rightTurn)
         {
-            double mainRoadSlope = IntersectionDB.getInstance().road_Main.meta_Data.longitudinalSlop;
+            /*double mainRoadSlope = IntersectionDB.getInstance().road_Main.longitudinalSlop;
             double sideSlope = 0;
             switch (rightTurn.meta_Data.side)
             {
@@ -102,7 +102,8 @@ namespace SolveIntersection.EndPoint
             }
             double length = ((mainRoadSlope*100) - (sideSlope*100)) * 10;
 
-            return length;
+            return length;*/
+            return 0;
         }
 
         public Alignment createAlignment(Transaction ts, Database database, CivilDocument civdoc, Polyline polyline)

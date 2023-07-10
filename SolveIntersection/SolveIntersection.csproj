@@ -66,6 +66,7 @@
     <Compile Include="DB\Entities\RoadComponent.cs" />
     <Compile Include="DB\Entities\RightTurn.cs" />
     <Compile Include="DTO\OffsetPoints.cs" />
+    <Compile Include="EndPoint\CreateTargetFeatureLine.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="DB\Entities\Selection.cs" />
     <Compile Include="DB\IntersectionDB.cs" />

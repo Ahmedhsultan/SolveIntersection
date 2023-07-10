@@ -34,8 +34,14 @@ namespace SolveIntersection.EndPoint
             road.meta_Data.rightSlop = calculateRoadSideSlope(ts, SubassemblySideType.Right);
             road.meta_Data.leftSlop = calculateRoadSideSlope(ts, SubassemblySideType.Left);
 
-            //Detect longitudinalSlop
-            road.meta_Data.longitudinalSlop = detectRoadLongitudinalSlop(ts);
+            //Detect corridor
+            Corridor corridor = ts.GetObject(road.baselineRegion.CorridorId, OpenMode.ForRead) as Corridor;
+            road.corridor = corridor;
+
+            //Detect profile
+            foreach(Baseline baseline in corridor.Baselines)
+                if (baseline.AlignmentId == road.alignment.Id)
+                    road.profile = ts.GetObject(baseline.ProfileId, OpenMode.ForRead) as Profile;
         }
 
         public static void detectAlignment(Transaction ts, Road road)
@@ -67,16 +73,6 @@ namespace SolveIntersection.EndPoint
                 road.meta_Data.direction = DB.Entities.Beans.Direction.BACKWORD;
             else if (crossProduct.Z < 0) // rightturn is on right
                 road.meta_Data.direction = DB.Entities.Beans.Direction.FORWORD;
-        }
-
-        public double detectRoadLongitudinalSlop(Transaction ts)
-        {
-            //Side slope
-            double slope = 0;
-
-            
-
-            return slope;
         }
 
         public double calculateRoadSideSlope(Transaction ts, SubassemblySideType subassemblySideType)
