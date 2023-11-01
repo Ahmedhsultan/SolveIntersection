@@ -17,7 +17,7 @@ namespace SolveIntersection
     {
 
         [CommandMethod("dar_solveIntersection")]
-        public static void main()
+        public static void run()
         {
             #region Documents
             Database database = Application.DocumentManager.MdiActiveDocument.Database;     //Defination
